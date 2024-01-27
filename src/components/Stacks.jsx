@@ -16,6 +16,16 @@ import coolorsImage from "../assets/stacks/coolors.png";
 import colorHuntImage from "../assets/stacks/colorhunt.png";
 import reactIconsImage from "../assets/stacks/reacticons.png";
 import fontAwesomeImage from "../assets/stacks/fontawesome.png";
+import flatIconImage from "../assets/stacks/flaticon.png";
+import bootstrapImage from "../assets/stacks/bootstrap.png";
+import bulmaImage from "../assets/stacks/bulma.png";
+import zeplinImage from "../assets/stacks/zeplin.png";
+import sheCodeImage from "../assets/stacks/shecode.png";
+import blobMakerImage from "../assets/stacks/blobmaker.PNG";
+import getWavesImage from "../assets/stacks/getwaves.PNG";
+import magicPatternImage from "../assets/stacks/magicpattern.png";
+import uiVerseImage from "../assets/stacks/uiverse.png";
+import cssButtonsImage from "../assets/stacks/cssbutton.png";
 
 const Stacks = () => {
   // Function to create a tool with a link
@@ -42,6 +52,42 @@ const Stacks = () => {
       javascriptImage,
       "https://www.javascript.com/"
     ),
+    createToolWithLink(
+      "She Codes",
+      "Interactive CSS Generators",
+      sheCodeImage,
+      "https://generators.shecodes.io/"
+    ),
+    createToolWithLink(
+      "Blobmaker",
+      "Blobmaker is a free generative design tool made with 💕",
+      blobMakerImage,
+      "https://www.blobmaker.app/"
+    ),
+    createToolWithLink(
+      "Get Waves",
+      "Make some waves!",
+      getWavesImage,
+      "https://getwaves.io/"
+    ),
+    createToolWithLink(
+      "Magic Pattern",
+      "Magic pattern gradient generator tool",
+      magicPatternImage,
+      "https://www.magicpattern.design/tools/gradient-generator"
+    ),
+    createToolWithLink(
+      "UIVerse",
+      "Open-Source UI elements for any project",
+      uiVerseImage,
+      "https://uiverse.io/"
+    ),
+    createToolWithLink(
+      "CSS Buttons",
+      "Collection of over 60+ handpicked and custom made CSS buttons for your website.",
+      cssButtonsImage,
+      "https://cssbuttons.app/"
+    ),
   ];
 
   const cssFramework = [
@@ -50,6 +96,18 @@ const Stacks = () => {
       "Utility-first CSS framework",
       tailwindCssImage,
       "https://tailwindcss.com/"
+    ),
+    createToolWithLink(
+      "Bootstrap",
+      "Build fast, responsive sites with Bootstrap",
+      bootstrapImage,
+      "https://getbootstrap.com/"
+    ),
+    createToolWithLink(
+      "Bulma",
+      "The modern CSS framework.",
+      bulmaImage,
+      "https://bulma.io/"
     ),
   ];
 
@@ -65,6 +123,12 @@ const Stacks = () => {
       "Create diagrams with draw.io",
       drawioImage,
       "https://draw.io/"
+    ),
+    createToolWithLink(
+      "Zeplin",
+      "Perfecting handoff was just the beginning",
+      zeplinImage,
+      "https://zeplin.io/"
     ),
   ];
 
@@ -118,13 +182,19 @@ const Stacks = () => {
       "React Icons",
       "Icon library for React applications",
       reactIconsImage,
-      "https://react-icons.github.io/"
+      "https://react-icons.github.io/react-icons/"
     ),
     createToolWithLink(
       "Font Awesome",
       "Vector icons and social logos",
       fontAwesomeImage,
       "https://fontawesome.com/"
+    ),
+    createToolWithLink(
+      "Flat Icon",
+      "Access 13.7M+ vector icons & stickers",
+      flatIconImage,
+      "https://www.flaticon.com/"
     ),
   ];
 
@@ -168,7 +238,7 @@ const Stacks = () => {
                 className="w-16 h-16 rounded-lg mb-2 object-contain"
               />
               <h3 className="text-lg font-semibold mb-2">{tool.name}</h3>
-              <p>{tool.description}</p>
+              <p className="text-xs">{tool.description}</p>
             </div>
           </a>
         ))}

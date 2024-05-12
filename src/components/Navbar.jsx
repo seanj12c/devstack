@@ -62,6 +62,11 @@ const Navbar = ({ setCategory }) => {
               </li>
             </a>
           ))}
+          <div className="flex justify-center">
+            <h1 className="text-xs fixed bottom-0 text-right">
+              ©Sean Jimwell Buclatin
+            </h1>
+          </div>
         </ul>
       </div>
     </div>

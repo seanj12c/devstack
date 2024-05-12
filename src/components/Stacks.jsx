@@ -26,7 +26,7 @@ import getWavesImage from "../assets/stacks/getwaves.PNG";
 import magicPatternImage from "../assets/stacks/magicpattern.png";
 import uiVerseImage from "../assets/stacks/uiverse.png";
 import cssButtonsImage from "../assets/stacks/cssbutton.png";
-
+import happyhuesImage from "../assets/stacks/happyhues.avif";
 const Stacks = () => {
   // Function to create a tool with a link
   function createToolWithLink(name, description, image, link) {
@@ -81,6 +81,12 @@ const Stacks = () => {
       "Open-Source UI elements for any project",
       uiVerseImage,
       "https://uiverse.io/"
+    ),
+    createToolWithLink(
+      "Happy Hues",
+      "Happy Hues is a color palette inspiration site that acts as a real world example as to how the colors could be used in your design projects.",
+      happyhuesImage,
+      "https://www.happyhues.co/"
     ),
     createToolWithLink(
       "CSS Buttons",
@@ -231,7 +237,7 @@ const Stacks = () => {
             rel="noopener noreferrer"
             className="cursor-pointer"
           >
-            <div className="bg-white p-4 mb-4 rounded shadow">
+            <div className="bg-white hover:shadow-sm duration-300 hover:-translate-y-1 hover:shadow-primary flex flex-col justify-between h-full p-4 mb-4 rounded shadow">
               <img
                 src={tool.image}
                 alt={tool.name}

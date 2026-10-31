@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import Navbar from "./Navbar";
-
-// Import images
+import React, { useMemo } from "react";
+import { FiArrowUpRight } from "react-icons/fi";
 import htmlImage from "../assets/stacks/html.png";
 import cssImage from "../assets/stacks/css.png";
 import javascriptImage from "../assets/stacks/javascript.png";
@@ -27,268 +25,64 @@ import magicPatternImage from "../assets/stacks/magicpattern.png";
 import uiVerseImage from "../assets/stacks/uiverse.png";
 import cssButtonsImage from "../assets/stacks/cssbutton.png";
 import happyhuesImage from "../assets/stacks/happyhues.avif";
-const Stacks = () => {
-  // Function to create a tool with a link
-  function createToolWithLink(name, description, image, link) {
-    return { name, description, image, link };
-  }
 
-  const frontEndTools = [
-    createToolWithLink(
-      "HTML",
-      "Document for HTML",
-      htmlImage,
-      "https://devdocs.io/html/"
-    ),
-    createToolWithLink(
-      "CSS",
-      "Styling with CSS",
-      cssImage,
-      "https://devdocs.io/css/"
-    ),
-    createToolWithLink(
-      "JavaScript",
-      "Dynamic scripting with JavaScript",
-      javascriptImage,
-      "https://www.javascript.com/"
-    ),
-    createToolWithLink(
-      "She Codes",
-      "Interactive CSS Generators",
-      sheCodeImage,
-      "https://generators.shecodes.io/"
-    ),
-    createToolWithLink(
-      "Blobmaker",
-      "Blobmaker is a free generative design tool made with 💕",
-      blobMakerImage,
-      "https://www.blobmaker.app/"
-    ),
-    createToolWithLink(
-      "Get Waves",
-      "Make some waves!",
-      getWavesImage,
-      "https://getwaves.io/"
-    ),
-    createToolWithLink(
-      "Magic Pattern",
-      "Magic pattern gradient generator tool",
-      magicPatternImage,
-      "https://www.magicpattern.design/tools/gradient-generator"
-    ),
-    createToolWithLink(
-      "UIVerse",
-      "Open-Source UI elements for any project",
-      uiVerseImage,
-      "https://uiverse.io/"
-    ),
-    createToolWithLink(
-      "Happy Hues",
-      "Happy Hues is a color palette inspiration site that acts as a real world example as to how the colors could be used in your design projects.",
-      happyhuesImage,
-      "https://www.happyhues.co/"
-    ),
-    createToolWithLink(
-      "CSS Buttons",
-      "Collection of over 60+ handpicked and custom made CSS buttons for your website.",
-      cssButtonsImage,
-      "https://cssbuttons.app/"
-    ),
-  ];
+import haikeiImage from "../assets/stacks/haikei.PNG";
 
-  const cssFramework = [
-    createToolWithLink(
-      "Tailwind CSS",
-      "Utility-first CSS framework",
-      tailwindCssImage,
-      "https://tailwindcss.com/"
-    ),
-    createToolWithLink(
-      "Bootstrap",
-      "Build fast, responsive sites with Bootstrap",
-      bootstrapImage,
-      "https://getbootstrap.com/"
-    ),
-    createToolWithLink(
-      "Bulma",
-      "The modern CSS framework.",
-      bulmaImage,
-      "https://bulma.io/"
-    ),
-  ];
+const item = (name, description, image, link, category) => ({ name, description, image, link, category });
+const tools = [
+  item("HTML", "Standards, syntax and references for the web.", htmlImage, "https://devdocs.io/html/", "Front End Tools"),
+  item("CSS", "A practical reference for styling the web.", cssImage, "https://devdocs.io/css/", "Front End Tools"),
+  item("JavaScript", "The essentials of modern client-side scripting.", javascriptImage, "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference", "Front End Tools"),
+  item("She Codes", "Friendly, fast generators for CSS details.", sheCodeImage, "https://generators.shecodes.io/", "Front End Tools"),
+  item("Blobmaker", "Generate organic SVG blobs in seconds.", blobMakerImage, "https://www.blobmaker.app/", "Front End Tools"),
+  item("Get Waves", "Make clean, editable SVG wave backgrounds.", getWavesImage, "https://getwaves.io/", "Front End Tools"),
+  item("Magic Pattern", "A visual toolkit for gradients and patterns.", magicPatternImage, "https://www.magicpattern.design/tools/gradient-generator", "Front End Tools"),
+  item("UIVerse", "Open-source UI elements for your next project.", uiVerseImage, "https://uiverse.io/", "Front End Tools"),
+  item("Happy Hues", "Palettes shown in thoughtful real-world layouts.", happyhuesImage, "https://www.happyhues.co/", "Theme | Colors"),
+  item("CSS Buttons", "A collection of polished CSS button ideas.", cssButtonsImage, "https://cssbuttons.app/", "Front End Tools"),
+  item("Tailwind CSS", "A utility-first framework for rapid UI work.", tailwindCssImage, "https://tailwindcss.com/", "CSS Framework"),
+  item("Bootstrap", "Responsive components and a dependable grid.", bootstrapImage, "https://getbootstrap.com/", "CSS Framework"),
+  item("Bulma", "Simple, modern CSS framework primitives.", bulmaImage, "https://bulma.io/", "CSS Framework"),
+  item("Figma", "A collaborative home for interface design.", figmaImage, "https://www.figma.com/", "Design Tools"),
+  item("draw.io", "Diagram ideas, systems, and user flows.", drawioImage, "https://app.diagrams.net/", "Design Tools"),
+  item("Zeplin", "Clearer design handoff for product teams.", zeplinImage, "https://zeplin.io/", "Design Tools"),
+  item("React", "A library for building component-based interfaces.", reactJsImage, "https://react.dev/", "Javascript Libraries"),
+  item("Anime.js", "A lightweight animation engine for the web.", animeJsImage, "https://animejs.com/", "Javascript Libraries"),
+  item("Google Fonts", "Browse typefaces ready for the web.", googleFontsImage, "https://fonts.google.com/", "Fonts"),
+  item("Fonts In Use", "Find type inspiration in the wild.", fontInUseImage, "https://fontsinuse.com/", "Fonts"),
+  item("Coolors", "Generate and refine color systems.", coolorsImage, "https://coolors.co/", "Theme | Colors"),
+  item("Color Hunt", "Fresh, curated color palette inspiration.", colorHuntImage, "https://colorhunt.co/", "Theme | Colors"),
+  item("React Icons", "Popular icon sets in one React package.", reactIconsImage, "https://react-icons.github.io/react-icons/", "Icons"),
+  item("Font Awesome", "A familiar, expansive icon library.", fontAwesomeImage, "https://fontawesome.com/", "Icons"),
+  item("Flaticon", "Millions of vector icons and stickers.", flatIconImage, "https://www.flaticon.com/", "Icons"),
+  item("shadcn/ui", "Customizable, accessible components with source code you own.", `${process.env.PUBLIC_URL}/shadcn.png`, "https://ui.shadcn.com/docs", "Front End Tools"),
+  item("Can I use", "Check browser support before choosing a web feature.", `${process.env.PUBLIC_URL}/caniuse.png`, "https://caniuse.com/", "Front End Tools"),
+  item("Haikei", "Generate SVG waves, blobs, and layered design assets.", haikeiImage, "https://haikei.app/", "Design Tools"),
+  item("Excalidraw", "Sketch diagrams and ideas on a collaborative whiteboard.", `${process.env.PUBLIC_URL}/excalidraw.png`, "https://excalidraw.com/", "Design Tools"),
+  item("Motion", "Animation tools for JavaScript, React, and Vue.", `${process.env.PUBLIC_URL}/motion.png`, "https://motion.dev/", "Javascript Libraries"),
+  item("Fontshare", "Explore fonts from the Indian Type Foundry.", `${process.env.PUBLIC_URL}/fontshare.png`, "https://www.fontshare.com/", "Fonts"),
+  item("OKLCH Color Picker", "Explore and convert colors in the OKLCH color space.", `${process.env.PUBLIC_URL}/oklch.ico`, "https://oklch.com/", "Theme | Colors"),
+  item("Lucide", "Browse customizable open-source SVG icons.", `${process.env.PUBLIC_URL}/lucide.ico`, "https://lucide.dev/icons", "Icons"),
+  item("Vite", "Fast development server and optimized frontend builds.", `${process.env.PUBLIC_URL}/vite.svg`, "https://vite.dev/", "Front End Tools"),
+  item("TypeScript", "Add static types and editor tooling to JavaScript.", `${process.env.PUBLIC_URL}/typescript.png`, "https://www.typescriptlang.org/", "Front End Tools"),
+  item("Next.js", "Build full-stack React applications with routing and rendering tools.", `${process.env.PUBLIC_URL}/nextjs.ico`, "https://nextjs.org/", "Front End Tools"),
+  item("Astro", "Build content-focused websites with less client-side JavaScript.", `${process.env.PUBLIC_URL}/astro.svg`, "https://astro.build/", "Front End Tools"),
+  item("Svelte", "Build reactive interfaces with a compiler-based framework.", `${process.env.PUBLIC_URL}/svelte.png`, "https://svelte.dev/", "Front End Tools"),
+  item("Vue.js", "A progressive framework for building reactive user interfaces.", `${process.env.PUBLIC_URL}/vue.svg`, "https://vuejs.org/", "Front End Tools"),
+  item("Playwright", "Test web applications across Chromium, Firefox, and WebKit.", `${process.env.PUBLIC_URL}/playwright.ico`, "https://playwright.dev/", "Front End Tools"),
+  item("Vitest", "Run unit and component tests with Vite-powered tooling.", `${process.env.PUBLIC_URL}/vitest.ico`, "https://vitest.dev/", "Front End Tools"),
+  item("Zod", "Validate data with TypeScript-first schemas and inferred types.", `${process.env.PUBLIC_URL}/zod.png`, "https://zod.dev/", "Javascript Libraries"),
+  item("TanStack Query", "Fetch, cache, and synchronize server state in your UI.", `${process.env.PUBLIC_URL}/tanstack.svg`, "https://tanstack.com/query/latest", "Javascript Libraries"),
+  item("Zustand", "Manage React application state with small, hook-based stores.", `${process.env.PUBLIC_URL}/zustand.png`, "https://zustand.docs.pmnd.rs/", "Javascript Libraries"),
+  item("Radix UI", "Accessible UI primitives, themes, icons, and colors.", `${process.env.PUBLIC_URL}/radix.png`, "https://www.radix-ui.com/", "Front End Tools"),
+  item("daisyUI", "Ready-to-use component classes and themes for Tailwind CSS.", `${process.env.PUBLIC_URL}/daisyui.svg`, "https://daisyui.com/", "CSS Framework"),
+  item("GSAP", "Create timeline, scroll, and SVG animations for the web.", `${process.env.PUBLIC_URL}/gsap.png`, "https://gsap.com/", "Javascript Libraries"),
+  item("Squoosh", "Compress and compare image formats directly in your browser.", `${process.env.PUBLIC_URL}/squoosh.ico`, "https://squoosh.app/", "Design Tools"),
+];
+const categories = ["All", "Front End Tools", "CSS Framework", "Design Tools", "Javascript Libraries", "Fonts", "Theme | Colors", "Icons"];
 
-  const designTools = [
-    createToolWithLink(
-      "Figma",
-      "Design and Collaborate in Figma",
-      figmaImage,
-      "https://www.figma.com/"
-    ),
-    createToolWithLink(
-      "draw.io",
-      "Create diagrams with draw.io",
-      drawioImage,
-      "https://draw.io/"
-    ),
-    createToolWithLink(
-      "Zeplin",
-      "Perfecting handoff was just the beginning",
-      zeplinImage,
-      "https://zeplin.io/"
-    ),
-  ];
-
-  const javascriptLibraries = [
-    createToolWithLink(
-      "React JS",
-      "Build user interfaces with React JS",
-      reactJsImage,
-      "https://react.dev/"
-    ),
-    createToolWithLink(
-      "Anime JS",
-      "JavaScript animation engine",
-      animeJsImage,
-      "https://animejs.com/"
-    ),
-  ];
-
-  const fonts = [
-    createToolWithLink(
-      "Google Fonts",
-      "Explore and use Google Fonts",
-      googleFontsImage,
-      "https://fonts.google.com/"
-    ),
-    createToolWithLink(
-      "Font in Use",
-      "Discover fonts in use",
-      fontInUseImage,
-      "https://fontsinuse.com/"
-    ),
-  ];
-
-  const themeColors = [
-    createToolWithLink(
-      "Coolors",
-      "Generate color schemes with Coolors",
-      coolorsImage,
-      "https://coolors.co/"
-    ),
-    createToolWithLink(
-      "Color Hunt",
-      "Discover and create color palettes on Color Hunt",
-      colorHuntImage,
-      "https://colorhunt.co/"
-    ),
-  ];
-
-  const icons = [
-    createToolWithLink(
-      "React Icons",
-      "Icon library for React applications",
-      reactIconsImage,
-      "https://react-icons.github.io/react-icons/"
-    ),
-    createToolWithLink(
-      "Font Awesome",
-      "Vector icons and social logos",
-      fontAwesomeImage,
-      "https://fontawesome.com/"
-    ),
-    createToolWithLink(
-      "Flat Icon",
-      "Access 13.7M+ vector icons & stickers",
-      flatIconImage,
-      "https://www.flaticon.com/"
-    ),
-  ];
-
-  // Sample data for different categories
-  const contentByCategory = {
-    All: [
-      ...frontEndTools,
-      ...cssFramework,
-      ...designTools,
-      ...javascriptLibraries,
-      ...fonts,
-      ...themeColors,
-      ...icons,
-    ],
-    "Front End Tools": frontEndTools,
-    "CSS Framework": cssFramework,
-    "Design Tools": designTools,
-    "Javascript Libraries": javascriptLibraries,
-    Fonts: fonts,
-    "Theme | Colors": themeColors,
-    Icons: icons,
-  };
-
-  const renderContent = () => {
-    return (
-      <div
-        className={`grid mx-auto sm:w-auto sm:mx-0 justify-center object-contain grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4`}
-      >
-        {contentByCategory[category].map((tool, index) => (
-          <a
-            key={index}
-            href={tool.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cursor-pointer"
-          >
-            <div className="bg-white hover:shadow-sm duration-300 hover:-translate-y-1 hover:shadow-primary flex flex-col justify-between h-full p-4 mb-4 rounded shadow">
-              <img
-                src={tool.image}
-                alt={tool.name}
-                className="w-16 h-16 rounded-lg mb-2 object-contain"
-              />
-              <h3 className="text-lg font-semibold mb-2">{tool.name}</h3>
-              <p className="text-xs">{tool.description}</p>
-            </div>
-          </a>
-        ))}
-      </div>
-    );
-  };
-
-  const [category, setCategory] = useState("All");
-
-  const renderSidebar = () => {
-    const categories = Object.keys(contentByCategory);
-
-    return (
-      <div className="hidden md:flex flex-col items-end pr-4">
-        {categories.map((cat, index) => (
-          <button
-            key={index}
-            onClick={() => setCategory(cat)}
-            className={`mb-2 py-2 px-4 rounded ${
-              cat === category ? "bg-primary text-white" : "bg-gray-100"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-    );
-  };
-
-  return (
-    <div className="flex flex-col h-screen">
-      <Navbar setCategory={setCategory} />
-
-      <div className="flex-1 p-4 md:p-8  bg-gray-100">
-        <div className="flex flex-col md:flex-row">
-          <div className="md:flex-1">
-            <h2 className="text-2xl font-semibold mb-4">{category}</h2>
-            {renderContent()}
-          </div>
-          {renderSidebar()}
-        </div>
-      </div>
-    </div>
-  );
+const Stacks = ({ category, onCategoryChange, search, onClearSearch, libraryLabel }) => {
+  const displayed = useMemo(() => tools.filter((tool) => (category === "All" || tool.category === category) && `${tool.name} ${tool.description} ${tool.category}`.toLowerCase().includes(search.trim().toLowerCase())), [category, search]);
+  return <section className="library" id="library"><div className="library-inner"><div className="section-heading"><div><p>THE DEVSTACKS DIRECTORY</p><h2>{search.trim() ? "Search results" : libraryLabel}</h2>{search.trim() && <p className="search-summary">Matching “{search.trim()}” <button type="button" onClick={onClearSearch}>Clear search ×</button></p>}</div><span className="resource-count" role="status" aria-live="polite">{displayed.length} resources</span></div><div className="category-pills" role="tablist" aria-label="Resource categories">{categories.map((name) => <button role="tab" aria-selected={category === name} className={category === name ? "active" : ""} key={name} onClick={() => onCategoryChange(name)}>{name}</button>)}</div><div className="resource-grid">{displayed.length ? displayed.map((tool) => <a className="resource-card" key={tool.name} href={tool.link} target="_blank" rel="noopener noreferrer"><div className="card-top"><img className="tool-logo" src={tool.image} alt={`${tool.name} logo`} /><FiArrowUpRight className="launch-icon" /></div><h3>{tool.name}</h3><p>{tool.description}</p></a>) : <div className="empty-state"><strong>No resources found.</strong><br />Try a different search or collection.</div>}</div></div></section>;
 };
-
 export default Stacks;

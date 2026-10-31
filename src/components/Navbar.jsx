@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import logo from "../assets/logo.png";
+import { FiMenu, FiSearch, FiX } from "react-icons/fi";
+const logo = `${process.env.PUBLIC_URL}/favic.png`;
 
-const Navbar = ({ setCategory }) => {
-  const [nav, setNav] = useState(false);
-
-  const handleNav = () => {
-    setNav(!nav);
-  };
+const Navbar = ({ category, onCategoryChange, search, onSearchChange }) => {
+  const [open, setOpen] = useState(false);
 
   const categories = [
     "All",
@@ -20,56 +16,23 @@ const Navbar = ({ setCategory }) => {
     "Icons",
   ];
 
-  const handleCategoryClick = (category) => {
-    setCategory(category);
-    handleNav();
+  const chooseCategory = (next) => {
+    onCategoryChange(next);
+    setOpen(false);
+    document.querySelector("#library")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <div className="fixed top-0 z-50 flex items-center justify-between w-full h-24 px-4 mx-auto bg-white md:px-20 bg-opacity-95">
-      <a className="flex items-center gap-2" href="#home">
-        <img className="h-20 object-contain" src={logo} alt="" />
-        <h1 className="w-full hidden md:block text-lg font-medium tracking-widest text-primary">
-          {`DEV `}
-          <span className="text-black">{`| STACKS`}</span>
-        </h1>
+    <header className="topbar">
+      <a className="brand" href="#top" aria-label="Dev Stacks home">
+        <span className="brand-mark"><img src={logo} alt="" /></span>
+        <span>DEV<span>STACKS</span></span>
       </a>
-
-      <div onClick={handleNav} className="block p-2 md:hidden">
-        {nav ? <AiOutlineClose size={28} /> : <AiOutlineMenu size={28} />}
-      </div>
-      <div
-        className={
-          nav
-            ? "fixed left-0 top-0 w-[80%] h-full border-r border-r-gray-900 bg-[#ffffff] ease-in-out duration-500"
-            : "fixed left-[-100%]"
-        }
-      >
-        <h1 className="w-full m-4 text-lg font-medium tracking-widest text-primary">
-          {`DEV `}
-          <span className="text-black">{`| STACKS`}</span>
-        </h1>
-
-        <ul className="p-4">
-          {categories.map((category, index) => (
-            <a
-              key={index}
-              onClick={() => handleCategoryClick(category)}
-              href={`#${category.toLowerCase().replace(/\s/g, "")}`}
-            >
-              <li className="p-4 border-b border-gray-600 active:bg-primary">
-                {category}
-              </li>
-            </a>
-          ))}
-          <div className="flex justify-center">
-            <h1 className="text-xs fixed bottom-0 text-right">
-              ©Sean Jimwell Buclatin
-            </h1>
-          </div>
-        </ul>
-      </div>
-    </div>
+      <nav className="desktop-nav" aria-label="Primary navigation"><a href="#library">Library</a><a href="#about">About</a></nav>
+      <label className="nav-search"><FiSearch aria-hidden="true" /><input value={search} onChange={(e) => onSearchChange(e.target.value)} placeholder="Search resources" aria-label="Search resources" /></label>
+      <button className="menu-button" onClick={() => setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}>{open ? <FiX /> : <FiMenu />}</button>
+      {open && <div className="mobile-menu"><label className="mobile-search"><FiSearch /><input value={search} onChange={(e) => onSearchChange(e.target.value)} placeholder="Search resources" /></label><a href="#library" onClick={() => setOpen(false)}>Resource library</a><a href="#about" onClick={() => setOpen(false)}>About DevStacks</a><p>Browse by collection</p><div className="mobile-categories">{categories.map((item) => <button className={category === item ? "active" : ""} onClick={() => chooseCategory(item)} key={item}>{item}</button>)}</div></div>}
+    </header>
   );
 };
 
